@@ -1,0 +1,29 @@
+.persons {
+  &__table {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__column {
+    &_n1 {
+      flex-grow: 1;
+    }
+    &_n2 {
+      flex-grow: 1.75;
+    }
+    &_n3 {
+      flex-grow: 0.25;
+    }
+  }
+  &__column-title {
+    border-top: 3px solid #f4f4f4;
+    background-color: #f8f8f8;
+    flex-grow: 1;
+    height: 40px;
+    h1 {
+      font-weight: bold;
+      line-height: 24px;
+      font-size: 18px;
+      align-self: flex-end;
+    }
+  }
+}
