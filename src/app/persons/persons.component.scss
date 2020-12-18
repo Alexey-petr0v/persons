@@ -1,29 +1,50 @@
 .persons {
   &__table {
     display: flex;
+    flex-direction: column;
+  }
+  &__row {
+    display: flex;
     justify-content: space-between;
+    flex-grow: 1;
   }
   &__column {
-    &_n1 {
-      flex-grow: 1;
-    }
-    &_n2 {
-      flex-grow: 1.75;
-    }
-    &_n3 {
-      flex-grow: 0.25;
-    }
-  }
-  &__column-title {
-    border-top: 3px solid #f4f4f4;
-    background-color: #f8f8f8;
-    flex-grow: 1;
-    height: 40px;
-    h1 {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    min-height: 40px;
+    .persons__title {
       font-weight: bold;
       line-height: 24px;
       font-size: 18px;
-      align-self: flex-end;
+      margin-left: 20px;
+      margin-top: 0px;
+      margin-bottom: 0px;
     }
+    .persons__text {
+      line-height: 18px;
+      font-size: 16px;
+      margin-left: 20px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    &_top {
+      border-top: 3px solid #f4f4f4;
+      background-color: #f8f8f8;
+    }
+    &_n1 {
+      min-width: 30%;
+    }
+    &_n2 {
+      min-width: 60%;
+    }
+    &_n3 {
+      min-width: 10%;
+    }
+  }
+  &__icon {
+    width: 18px;
+    height: 18px;
+    margin-left: 20px;
   }
 }
