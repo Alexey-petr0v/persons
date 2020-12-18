@@ -14,18 +14,17 @@
     </div> 
 
 
-    <div class="persons__row">
+    <div class="persons__row" *ngFor="let item of peoples">
       <div class="persons__column persons__column_n1">
         <img class="persons__icon" src="assets/images/person-icon.svg" alt="person-icon">
-        <p class="persons__text">Джон</p>
+        <p class="persons__text">{{ item.firstName }}</p>
       </div>
       <div class="persons__column persons__column_n2">
-        <p class="persons__text">Мэнсон</p>
+        <p class="persons__text">{{ item.lastName }}</p>
       </div>
       <div class="persons__column persons__column_n3">
       </div>
-    </div> 
-
+    </div>
 
   </div>
 </div>
