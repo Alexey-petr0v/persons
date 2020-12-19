@@ -1,11 +1,10 @@
 export class Person {
-  id: number = 0;
-  firstName: string = '';
-  lastName: string = '';
-  
-  constructor() {
-    this.id = 0;
-    this.firstName = '';
-    this.lastName = '';
+  readonly id: number;
+  firstName: string;
+  lastName: string;
+  constructor(id: number, firstName: string, lastName: string) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 }
