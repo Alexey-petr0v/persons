@@ -26,6 +26,13 @@
   display: flex;
   justify-content: flex-end;
 }
+.remove-person__edit {
+  min-width: 32px;
+  min-height: 32px;
+  background-color: #f7cbca;
+  border: 1px solid #f3a7a5;
+  cursor: pointer;
+}
 .remove-person__button {
   min-width: 40px;
   margin-top: 15px;

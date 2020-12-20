@@ -1,7 +1,10 @@
 <div class="update-person">
-  <button class="update-person__edit" (click)="viewModal()">/</button>
+  <button class="update-person__edit material-icons md-24" (click)="viewModal()">create</button>
   <div class="update-person__modal" [class]="hideModal">
     <div class="update-person__window">
+      <div class="update-person__top">
+        <h1 class="update-person__title">Редактирование сотрудника</h1>
+      </div>
       <div class="update-person__form">
         <p><a href="#" (click)="viewModal()">Назад к списку</a></p>
         <input type="text" name="firstName" class="update-person__input update-person__input_first" [(ngModel)]="firstName">

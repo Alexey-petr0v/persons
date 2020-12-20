@@ -2,8 +2,5 @@
 
 @import "../node_modules/normalize.css/normalize.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:display=swap');
 
-html {
-  font-family: 'Roboto Condensed', sans-serif;
-}
+@import url('./assets/fonts/fonts.scss');

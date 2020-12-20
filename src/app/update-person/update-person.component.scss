@@ -14,8 +14,20 @@
 }
 .update-person__window {
   min-width: 360px;
-  padding-top: 0.5rem;
   border: 1px solid grey;
+  border-radius: 6px;
+}
+.update-person__top {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  background-color: #999999;
+}
+.update-person__title {
+  margin: 10px;
+  font-size: 16px;
+  color: white;
 }
 .update-person__form {
   display: flex;
@@ -28,6 +40,13 @@
 .update-person__buttons {
   display: flex;
   justify-content: flex-end;
+}
+.update-person__edit {
+  min-width: 32px;
+  min-height: 32px;
+  background-color: #fff7c9;
+  border: 1px solid #faec9c;
+  cursor: pointer;
 }
 .update-person__button {
   margin-top: 15px;
