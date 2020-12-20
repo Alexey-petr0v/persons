@@ -110,11 +110,13 @@ export class PersonsService {
   // -------- CONNECT/DISCONNECT SERVER-------- ///
   private bindPersonsFromServer(that: PersonsService) {
     this.http.get('http://localhost:3000/persons').subscribe((response : any) => {
-      that.persons = response.map(function(obj : Person) {
-        let person = {id: obj.id, firstName: obj.firstName, lastName: obj.lastName};
-        return person;
-      });
-      that.subject.next(that.persons);
+      if (JSON.stringify(that.persons) !== JSON.stringify(response)) {
+        that.persons = response.map(function(obj : Person) {
+          let person = {id: obj.id, firstName: obj.firstName, lastName: obj.lastName};
+          return person;
+        });
+        that.subject.next(that.persons);
+      }
     });
   }
 
