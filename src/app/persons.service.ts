@@ -27,14 +27,23 @@ export class PersonsService {
   }
 
   public removePerson(id: number) {
-    this.disconnectServer();
-    this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
-      this.connectServer();
-    });
+    this.http.delete('http://localhost:3000/persons/' + id);
   }
 
   public getPersons(): Observable<Array<Person>> {
     return this.subject.asObservable();
+  }
+
+  public createPerson(firstName: string, lastName: string) {
+    let newId: number = 1;
+    if (this.persons !== []) {
+      newId = this.persons[this.persons.length-1].id+1;
+    }
+    this.http.post('http://localhost:3000/persons', {
+      id: newId,
+      firstName: firstName,
+      lastName: lastName
+    });
   }
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///

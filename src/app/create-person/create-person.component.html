@@ -1,0 +1,16 @@
+<div class="create-person">
+  <button class="create-person__button" (click)="viewModal()">Добавить сотрудника</button>
+
+  <div class="create-person__modal" [class]="hideModal">
+    <div class="create-person__window">
+      <div class="create-person__form">
+        <p (click)="viewModal()"><a href="#">Назад к списку</a></p>
+        <input type="text" name="firstName" [(ngModel)]="firstName">
+        <input type="text" name="lastName" [(ngModel)]="lastName">
+        <div class="create-person__buttons">
+          <button class="create-person__button" (click)="savePerson()">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@
     </div> 
 
 
-    <div class="persons__row" *ngFor="let item of peoples; let i = index">
+    <div class="persons__row" *ngFor="let item of peoples">
       <div class="persons__column persons__column_n1">
         <img class="persons__icon" src="assets/images/person-icon.svg" alt="person-icon">
         <p class="persons__text">{{ item.firstName }}</p>
@@ -23,9 +23,10 @@
         <p class="persons__text">{{ item.lastName }}</p>
       </div>
       <div class="persons__column persons__column_n3">
-        <app-remove-person [idperson]="i+1"></app-remove-person>
+        <app-remove-person [idperson]="item.id"></app-remove-person>
       </div>
     </div>
+    <app-create-person></app-create-person>
 
   </div>
 </div>

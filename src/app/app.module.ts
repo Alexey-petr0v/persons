@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonsComponent } from './persons/persons.component';
 import { RemovePersonComponent } from './remove-person/remove-person.component';
+import { CreatePersonComponent } from './create-person/create-person.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonsComponent,
-    RemovePersonComponent
+    RemovePersonComponent,
+    CreatePersonComponent
   ],
   imports: [
     CommonModule,
