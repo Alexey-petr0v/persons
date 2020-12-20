@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Person } from './person';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Notifer } from './notifier/notifer';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ export class PersonsService {
   persons: Array<Person> = [];
   subject = new BehaviorSubject(this.persons);
   iterval = 0;
+
+  message: Notifer = {type: 'hide', text: 'test'}
+  subjectMessages = new BehaviorSubject(this.message);
 
   constructor(public http:HttpClient) {
     this.bindPersonsFromServer(this);
@@ -33,23 +37,31 @@ export class PersonsService {
     (error: any) => {
     switch (error.status) {
       case 400:
-        alert("Сотрудник не удален из-за технической ошибки");
+        this.message = {type: 'error', text: 'Сотрудник не удален из-за технической ошибки'};
+        this.subjectMessages.next(this.message);
         break;
       case 404:
-        alert("Сотрудник не существует");
+        this.message = {type: 'error', text: 'Сотрудник не существует'};
+        this.subjectMessages.next(this.message);
         break;
       case 500:
-        alert("Сотрудник не удален из-за технической ошибки на сервере");
+        this.message = {type: 'error', text: 'Сотрудник не удален из-за технической ошибки на сервере'};
+        this.subjectMessages.next(this.message);
         break;
     }
   },
   () => {
-    alert("Сотрудник успешно уданён");
+    this.message = {type: 'success', text: 'Сотрудник успешно удалён'};
+    this.subjectMessages.next(this.message);
   });
   }
 
   public getPersons(): Observable<Array<Person>> {
     return this.subject.asObservable();
+  }
+
+  public getMessage(): Observable<Notifer> {
+    return this.subjectMessages.asObservable();
   }
 
   public createPerson(firstName: string, lastName: string) {
@@ -67,18 +79,22 @@ export class PersonsService {
     (error: any) => {
       switch (error.status) {
         case 400:
-          alert("Сотрудник не добавлен из-за технической ошибки");
+          this.message = {type: 'error', text: 'Сотрудник не добавлен из-за технической ошибки'};
+          this.subjectMessages.next(this.message);
           break;
         case 404:
-          alert("Сотрудник не существует");
+          this.message = {type: 'error', text: 'Сотрудник не существует'};
+          this.subjectMessages.next(this.message);
           break;
         case 500:
-          alert("Сотрудник не добавлен из-за технической ошибки на сервере");
+          this.message = {type: 'error', text: 'Сотрудник не добавлен из-за технической ошибки на сервере'};
+          this.subjectMessages.next(this.message);
           break;
       }
     },
     () => {
-      alert("Сотрудник успешно добавлен");
+      this.message = {type: 'success', text: 'Сотрудник успешно добавлен'};
+      this.subjectMessages.next(this.message);
     });
   }
 
@@ -92,18 +108,22 @@ export class PersonsService {
     (error: any) => {
       switch (error.status) {
         case 400:
-          alert("Данные о сотруднике не изменены из-за технической ошибки");
+          this.message = {type: 'error', text: 'Данные о сотруднике не изменены из-за технической ошибки'};
+          this.subjectMessages.next(this.message);
           break;
         case 404:
-          alert("Сотрудник не существует");
+          this.message = {type: 'error', text: 'Сотрудник не существует'};
+          this.subjectMessages.next(this.message);
           break;
         case 500:
-          alert("Данные о сотруднике не изменены из-за технической ошибки на сервере");
+          this.message = {type: 'error', text: 'Данные о сотруднике не изменены из-за технической ошибки на сервере'};
+          this.subjectMessages.next(this.message);
           break;
       }
     },
     () => {
-      alert("Данные о сотруднике успешно изменены");
+      this.message = {type: 'success', text: 'Данные о сотруднике успешно изменены'};
+      this.subjectMessages.next(this.message);
     });
   }
 

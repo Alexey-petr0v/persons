@@ -1,0 +1,8 @@
+<div class="notifier" (click)="closeNotifer()" [class]="modNotifer">
+  <div class="notifier__box">
+    <p class="notifier__text" [(ngModel)]="text" ngDefaultControl>{{ text }}</p>
+    <div class="notifier__close">
+      <p>x</p>
+    </div>
+  </div>
+</div>

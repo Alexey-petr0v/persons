@@ -10,6 +10,7 @@ import { PersonsComponent } from './persons/persons.component';
 import { RemovePersonComponent } from './remove-person/remove-person.component';
 import { CreatePersonComponent } from './create-person/create-person.component';
 import { UpdatePersonComponent } from './update-person/update-person.component';
+import { NotifierComponent } from './notifier/notifier.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UpdatePersonComponent } from './update-person/update-person.component';
     PersonsComponent,
     RemovePersonComponent,
     CreatePersonComponent,
-    UpdatePersonComponent
+    UpdatePersonComponent,
+    NotifierComponent
   ],
   imports: [
     CommonModule,
