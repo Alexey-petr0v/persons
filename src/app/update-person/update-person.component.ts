@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { PersonsService } from '../persons.service';
 
 @Component({
@@ -7,25 +8,25 @@ import { PersonsService } from '../persons.service';
   styleUrls: ['./update-person.component.scss']
 })
 export class UpdatePersonComponent implements OnInit {
-  
-  @Input('idperson') idperson: number = 0;
 
-  @Input('firstName') firstName: string = '';
-  @Input('lastName') lastName: string = '';
-  hideModal: string = 'update-person__modal_hide'
+  @Input() idperson = 0;
+
+  @Input() firstName = '';
+  @Input() lastName = '';
+  hideModal = 'update-person__modal_hide';
 
   constructor(public personsService: PersonsService) { }
 
   ngOnInit(): void {
   }
 
-  updatePerson() {
+  updatePerson(): void {
     this.personsService.updatePerson(this.idperson, this.firstName, this.lastName);
     this.viewModal();
   }
 
-  viewModal() {
-    if (this.hideModal == 'update-person__modal_hide') {
+  viewModal(): void {
+    if (this.hideModal === 'update-person__modal_hide') {
       this.personsService.disconnectServer();
       this.hideModal =  '';
     }
@@ -33,7 +34,5 @@ export class UpdatePersonComponent implements OnInit {
       this.personsService.connectServer();
       this.hideModal =  'update-person__modal_hide';
     }
-    
   }
-
 }

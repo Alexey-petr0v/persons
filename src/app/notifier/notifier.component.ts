@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { PersonsService } from '../persons.service';
 import { Notifer } from './notifer';
 
@@ -14,9 +15,9 @@ export class NotifierComponent implements OnInit {
   notifer: Notifer = {type: '', text: ''};
   private sub = new Subscription();
 
-  @Input('text') text: string = '';
+  @Input() text = '';
 
-  modNotifer: string = 'notifier_hide';
+  modNotifer = 'notifier_hide';
 
 
   constructor(public personsService: PersonsService) { }
@@ -24,22 +25,21 @@ export class NotifierComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.personsService.getMessage().subscribe(notifer => {
       this.notifer = notifer;
-      console.log("getMessage");
       this.text = notifer.text;
-      if (notifer.type == 'success') {
-        this.modNotifer = 'notifier_success'
+      if (notifer.type === 'success') {
+        this.modNotifer = 'notifier_success';
       }
-      else if (notifer.type == 'error') {
-        this.modNotifer = 'notifier_error'
+      else if (notifer.type === 'error') {
+        this.modNotifer = 'notifier_error';
       }
-      else if (notifer.type == 'hide') {
-        this.modNotifer = 'notifier_hide'
+      else if (notifer.type === 'hide') {
+        this.modNotifer = 'notifier_hide';
       }
       this.subs.add(this.sub);
-    })
+    });
   }
 
-  closeNotifer() {
+  closeNotifer(): void {
     this.modNotifer =  'notifier_hide';
   }
 

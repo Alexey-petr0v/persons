@@ -14,23 +14,23 @@ export class PersonsService {
   subject = new BehaviorSubject(this.persons);
   iterval = 0;
 
-  message: Notifer = {type: 'hide', text: 'test'}
+  message: Notifer = {type: 'hide', text: 'test'};
   subjectMessages = new BehaviorSubject(this.message);
 
-  constructor(public http:HttpClient) {
+  constructor(public http: HttpClient) {
     this.bindPersonsFromServer(this);
 
-    let that = this;
-    this.setTimer(that, () => {
+    const that = this;
+    this.setTimer(() => {
       that.bindPersonsFromServer(that);
     });
   }
 
-  private setTimer(thatObj: Object, func: Function) {
-    this.iterval = setInterval((thatObj: any[]) => {return func(thatObj)}, 1000);
+  private setTimer(func: () => void): void {
+    this.iterval = window.setInterval(() => func(), 1000);
   }
 
-  public removePerson(id: number) {
+  public removePerson(id: number): void {
     this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
       console.log(data);
     },
@@ -64,15 +64,15 @@ export class PersonsService {
     return this.subjectMessages.asObservable();
   }
 
-  public createPerson(firstName: string, lastName: string) {
-    let newId: number = 1;
+  public createPerson(firstName: string, lastName: string): void {
+    let id = 1;
     if (this.persons.length !== 0) {
-      newId = this.persons[this.persons.length-1].id+1;
+      id = this.persons[this.persons.length - 1].id + 1;
     }
     this.http.post('http://localhost:3000/persons', {
-      id: newId,
-      firstName: firstName,
-      lastName: lastName
+      id,
+      firstName,
+      lastName
     }).subscribe(data => {
       console.log(data);
     },
@@ -98,10 +98,10 @@ export class PersonsService {
     });
   }
 
-  public updatePerson(id: number, firstName: string, lastName: string){
+  public updatePerson(id: number, firstName: string, lastName: string): void {
     this.http.put('http://localhost:3000/persons/' + id, {
-      firstName: firstName,
-      lastName: lastName
+      firstName,
+      lastName
     }).subscribe(data => {
       console.log(data);
     },
@@ -128,11 +128,11 @@ export class PersonsService {
   }
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///
-  private bindPersonsFromServer(that: PersonsService) {
-    this.http.get('http://localhost:3000/persons').subscribe((response : any) => {
+  private bindPersonsFromServer(that: PersonsService): void {
+    this.http.get('http://localhost:3000/persons').subscribe((response: any) => {
       if (JSON.stringify(that.persons) !== JSON.stringify(response)) {
-        that.persons = response.map(function(obj : Person) {
-          let person = {id: obj.id, firstName: obj.firstName, lastName: obj.lastName};
+        that.persons = response.map((obj: Person) => {
+          const person = {id: obj.id, firstName: obj.firstName, lastName: obj.lastName};
           return person;
         });
         that.subject.next(that.persons);
@@ -140,13 +140,13 @@ export class PersonsService {
     });
   }
 
-  public disconnectServer() {
+  public disconnectServer(): void {
     clearInterval(this.iterval);
   }
 
-  public connectServer() {
-    let that = this;
-    that.setTimer(that, function() {
+  public connectServer(): void {
+    const that = this;
+    that.setTimer(() => {
       that.bindPersonsFromServer(that);
     });
   }

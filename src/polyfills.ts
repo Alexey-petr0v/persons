@@ -55,8 +55,8 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 /***************************************************************************************************

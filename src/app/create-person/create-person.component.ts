@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { PersonsService } from '../persons.service';
 
 @Component({
@@ -8,21 +9,21 @@ import { PersonsService } from '../persons.service';
 })
 export class CreatePersonComponent implements OnInit {
 
-  firstName: string = '';
-  lastName: string = '';
-  hideModal: string = 'create-person__modal_hide'
+  firstName = '';
+  lastName = '';
+  hideModal = 'create-person__modal_hide';
 
   constructor(public personsService: PersonsService) { }
 
   ngOnInit(): void {
   }
 
-  savePerson() {
+  savePerson(): void {
     this.personsService.createPerson(this.firstName, this.lastName);
     this.viewModal();
   }
 
-  viewModal() {
-    this.hideModal = this.hideModal == 'create-person__modal_hide' ? '' : 'create-person__modal_hide'
+  viewModal(): void {
+    this.hideModal = this.hideModal === 'create-person__modal_hide' ? '' : 'create-person__modal_hide';
   }
 }

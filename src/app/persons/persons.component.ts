@@ -1,8 +1,7 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Person } from '../person';
 
+import { Person } from '../person';
 import { PersonsService } from '../persons.service';
 
 @Component({
@@ -22,11 +21,10 @@ export class PersonsComponent implements OnInit, OnDestroy {
     this.sub = this.personsService.getPersons().subscribe(peoples => {
       this.peoples = peoples;
       this.subs.add(this.sub);
-      console.log(1);
-    })
+    });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 }

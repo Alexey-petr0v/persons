@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { PersonsService } from '../persons.service';
 
 @Component({
@@ -7,22 +8,22 @@ import { PersonsService } from '../persons.service';
   styleUrls: ['./remove-person.component.scss']
 })
 export class RemovePersonComponent implements OnInit {
-  
-  @Input('idperson') idperson: number = 0;
-  hideModal: string = 'remove-person__modal_hide'
+
+  @Input() idperson = 0;
+  hideModal = 'remove-person__modal_hide';
 
   constructor(public personsService: PersonsService) { }
 
   ngOnInit(): void {
   }
 
-  removePerson() {
-    this.personsService.removePerson(this.idperson)
+  removePerson(): void {
+    this.personsService.removePerson(this.idperson);
     this.viewModal();
   }
 
-  viewModal() {
-    if (this.hideModal == 'remove-person__modal_hide') {
+  viewModal(): void {
+    if (this.hideModal === 'remove-person__modal_hide') {
       this.personsService.disconnectServer();
       this.hideModal =  '';
     }
@@ -30,7 +31,5 @@ export class RemovePersonComponent implements OnInit {
       this.personsService.connectServer();
       this.hideModal =  'remove-person__modal_hide';
     }
-    
   }
-
 }

@@ -8,5 +8,4 @@ import { PersonsService } from './persons.service';
   providers: [PersonsService]
 })
 export class AppComponent {
-  title = 'persons';
 }
