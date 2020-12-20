@@ -16,7 +16,6 @@ export class RemovePersonComponent implements OnInit {
   }
 
   removePerson() {
-    console.log("idperson: "+this.idperson)
     this.personsService.removePerson(this.idperson)
   }
 

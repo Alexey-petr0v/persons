@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { PersonsComponent } from './persons/persons.component';
 import { RemovePersonComponent } from './remove-person/remove-person.component';
 import { CreatePersonComponent } from './create-person/create-person.component';
+import { UpdatePersonComponent } from './update-person/update-person.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonsComponent,
     RemovePersonComponent,
-    CreatePersonComponent
+    CreatePersonComponent,
+    UpdatePersonComponent
   ],
   imports: [
     CommonModule,

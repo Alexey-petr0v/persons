@@ -27,7 +27,7 @@ export class PersonsService {
   }
 
   public removePerson(id: number) {
-    this.http.delete('http://localhost:3000/persons/' + id);
+    this.http.delete('http://localhost:3000/persons/' + id).subscribe(() => {});
   }
 
   public getPersons(): Observable<Array<Person>> {
@@ -36,14 +36,21 @@ export class PersonsService {
 
   public createPerson(firstName: string, lastName: string) {
     let newId: number = 1;
-    if (this.persons !== []) {
+    if (this.persons.length !== 0) {
       newId = this.persons[this.persons.length-1].id+1;
     }
     this.http.post('http://localhost:3000/persons', {
       id: newId,
       firstName: firstName,
       lastName: lastName
-    });
+    }).subscribe(() => {});
+  }
+
+  public updatePerson(id: number, firstName: string, lastName: string){
+    this.http.put('http://localhost:3000/persons/' + id, {
+      firstName: firstName,
+      lastName: lastName
+    }).subscribe(() => {});
   }
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///

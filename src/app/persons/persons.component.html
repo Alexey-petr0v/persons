@@ -23,6 +23,7 @@
         <p class="persons__text">{{ item.lastName }}</p>
       </div>
       <div class="persons__column persons__column_n3">
+        <app-update-person [idperson]="item.id" [firstName]="item.firstName" [lastName]="item.lastName"></app-update-person>
         <app-remove-person [idperson]="item.id"></app-remove-person>
       </div>
     </div>

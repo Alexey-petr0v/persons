@@ -1,0 +1,29 @@
+.update-person__modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background-color: white;
+  &_hide {
+    display: none;
+  }
+}
+.update-person__window {
+  min-width: 440px;
+  padding-top: 0.5rem;
+  height: 300px;
+  border: 1px solid grey;
+}
+.update-person__form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.update-person__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
