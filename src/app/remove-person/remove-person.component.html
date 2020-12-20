@@ -1,1 +1,14 @@
-<button (click)="removePerson()">X</button>
+<div class="remove-person">
+  <button class="remove-person__edit" (click)="viewModal()">X</button>
+  <div class="remove-person__modal" [class]="hideModal">
+    <div class="remove-person__window">
+      <div class="remove-person__form">
+        <p>Вы действительно хотите удалить сотрудника?</p>
+        <div class="remove-person__buttons">
+          <button class="remove-person__button remove-person__button_first" (click)="removePerson()">Да</button>
+          <button class="remove-person__button" (click)="viewModal()">Нет</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

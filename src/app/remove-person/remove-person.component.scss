@@ -1,0 +1,43 @@
+.remove-person__modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background-color: white;
+  &_hide {
+    display: none;
+  }
+}
+.remove-person__window {
+  min-width: 440px;
+  padding-top: 0.5rem;
+  height: 300px;
+  border: 1px solid grey;
+}
+.remove-person__form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.remove-person__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.remove-person__button {
+  min-width: 40px;
+  margin-top: 15px;
+  background: #398be1;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 6px;
+  padding: 12px 6px;
+  cursor: pointer;
+  &_first {
+    margin-right: 10px;
+  }
+}

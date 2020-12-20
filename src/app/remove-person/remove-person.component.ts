@@ -9,6 +9,7 @@ import { PersonsService } from '../persons.service';
 export class RemovePersonComponent implements OnInit {
   
   @Input('idperson') idperson: number = 0;
+  hideModal: string = 'remove-person__modal_hide'
 
   constructor(public personsService: PersonsService) { }
 
@@ -17,6 +18,19 @@ export class RemovePersonComponent implements OnInit {
 
   removePerson() {
     this.personsService.removePerson(this.idperson)
+    this.viewModal();
+  }
+
+  viewModal() {
+    if (this.hideModal == 'remove-person__modal_hide') {
+      this.personsService.disconnectServer();
+      this.hideModal =  '';
+    }
+    else {
+      this.personsService.connectServer();
+      this.hideModal =  'remove-person__modal_hide';
+    }
+    
   }
 
 }
