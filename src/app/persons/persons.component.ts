@@ -1,50 +1,32 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Person } from '../person';
+
+import { PersonsService } from '../persons.service';
 
 @Component({
   selector: 'app-persons',
   templateUrl: './persons.component.html',
   styleUrls: ['./persons.component.scss']
 })
-export class PersonsComponent implements OnInit {
+export class PersonsComponent implements OnInit, OnDestroy {
 
-  peoples = new Array();
-  x = '';
+  private subs = new Subscription();
+  peoples: Array<Person> = [];
+  private sub = new Subscription();
 
-  constructor(http:HttpClient) {
+  constructor(public personsService: PersonsService) { }
 
-    function getJSON(that: PersonsComponent) {
-      http.get('http://localhost:3000/persons').subscribe((response : any) => {
-        that.peoples = response.map(function(obj : Person) {
-          let person = new Person();
-          person.id = obj.id;
-          person.firstName = obj.firstName;
-          person.lastName = obj.lastName;
-          return person;
-        });
-      })
-    }
-
-    function setTimer(thatObj: Object, func: Function) {
-      setInterval((thatObj: any[]) => {return func(thatObj)}, 2000);
-    }
-    
-    getJSON(this);
-
-    let that = this;
-    setTimer(that, function() {
-      console.log(that);
-      getJSON(that);
+  ngOnInit(): void {
+    this.sub = this.personsService.getPersons().subscribe(peoples => {
+      this.peoples = peoples;
+      this.subs.add(this.sub);
+      console.log(1);
     })
   }
 
-
-    // console.log("this.peoples:"+this.peoples)
-    // console.log("this.peoples instanceof Array: "+(this.peoples instanceof Array));
-    // console.log("this.peoples[0] instanceof Person: "+(this.peoples[0] instanceof Person));
-  ngOnInit(): void {
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
-
 }
