@@ -14,16 +14,45 @@
 }
 .create-person__window {
   min-width: 440px;
-  padding-top: 0.5rem;
+  border: 1px solid grey;
+}
+.create-person__window {
+  min-width: 440px;
   height: 300px;
   border: 1px solid grey;
+  border-radius: 6px;
+}
+.create-person__top {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  background-color: #999999;
+}
+.create-person__title {
+  margin: 10px;
+  font-size: 16px;
+  color: white;
 }
 .create-person__form {
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
+.create-person__input_first {
+  margin-bottom: 10px;
+}
 .create-person__buttons {
   display: flex;
   justify-content: flex-end;
+}
+.create-person__button {
+  margin-top: 15px;
+  background: #398be1;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 6px;
+  padding: 12px 6px;
+  cursor: pointer;
 }

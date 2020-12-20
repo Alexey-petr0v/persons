@@ -1,11 +1,11 @@
 <div class="update-person">
-  <button class="update-person__button" (click)="viewModal()">/</button>
+  <button class="update-person__edit" (click)="viewModal()">/</button>
   <div class="update-person__modal" [class]="hideModal">
     <div class="update-person__window">
       <div class="update-person__form">
         <p (click)="viewModal()"><a href="#">Назад к списку</a></p>
-        <input type="text" name="firstName" [(ngModel)]="firstName">
-        <input type="text" name="lastName" [(ngModel)]="lastName">
+        <input type="text" name="firstName" class="update-person__input update-person__input_first" [(ngModel)]="firstName">
+        <input type="text" name="lastName" class="update-person__input" [(ngModel)]="lastName">
         <div class="update-person__buttons">
           <button class="update-person__button" (click)="updatePerson()">Сохранить</button>
         </div>

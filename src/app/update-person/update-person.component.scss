@@ -23,7 +23,20 @@
   flex-direction: column;
   margin: 10px;
 }
+.update-person__input_first {
+  margin-bottom: 10px;
+}
 .update-person__buttons {
   display: flex;
   justify-content: flex-end;
+}
+.update-person__button {
+  margin-top: 15px;
+  background: #398be1;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 6px;
+  padding: 12px 6px;
+  cursor: pointer;
 }

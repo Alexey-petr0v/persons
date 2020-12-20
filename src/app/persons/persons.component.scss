@@ -7,12 +7,18 @@
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
+    border-bottom: 3px solid #f4f4f4;
+    &_top {
+      border-top: 3px solid #f4f4f4;
+      background-color: #f8f8f8;
+    }
   }
   &__column {
     display: flex;
     align-items: flex-end;
     flex-wrap: nowrap;
     min-height: 40px;
+    margin-bottom: 5px;
     .persons__title {
       font-weight: bold;
       line-height: 24px;
@@ -27,10 +33,6 @@
       margin-left: 20px;
       margin-top: 0px;
       margin-bottom: 0px;
-    }
-    &_top {
-      border-top: 3px solid #f4f4f4;
-      background-color: #f8f8f8;
     }
     &_n1 {
       min-width: 30%;
