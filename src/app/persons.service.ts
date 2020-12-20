@@ -23,11 +23,29 @@ export class PersonsService {
   }
 
   private setTimer(thatObj: Object, func: Function) {
-    this.iterval = setInterval((thatObj: any[]) => {return func(thatObj)}, 2000);
+    this.iterval = setInterval((thatObj: any[]) => {return func(thatObj)}, 1000);
   }
 
   public removePerson(id: number) {
-    this.http.delete('http://localhost:3000/persons/' + id).subscribe(() => {});
+    this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
+      console.log(data);
+    },
+    (error: any) => {
+    switch (error.status) {
+      case 400:
+        alert("Сотрудник не удален из-за технической ошибки");
+        break;
+      case 404:
+        alert("Сотрудник не существует");
+        break;
+      case 500:
+        alert("Сотрудник не удален из-за технической ошибки на сервере");
+        break;
+    }
+  },
+  () => {
+    alert("Сотрудник успешно уданён");
+  });
   }
 
   public getPersons(): Observable<Array<Person>> {
@@ -43,14 +61,50 @@ export class PersonsService {
       id: newId,
       firstName: firstName,
       lastName: lastName
-    }).subscribe(() => {});
+    }).subscribe(data => {
+      console.log(data);
+    },
+    (error: any) => {
+      switch (error.status) {
+        case 400:
+          alert("Сотрудник не добавлен из-за технической ошибки");
+          break;
+        case 404:
+          alert("Сотрудник не существует");
+          break;
+        case 500:
+          alert("Сотрудник не добавлен из-за технической ошибки на сервере");
+          break;
+      }
+    },
+    () => {
+      alert("Сотрудник успешно добавлен");
+    });
   }
 
   public updatePerson(id: number, firstName: string, lastName: string){
     this.http.put('http://localhost:3000/persons/' + id, {
       firstName: firstName,
       lastName: lastName
-    }).subscribe(() => {});
+    }).subscribe(data => {
+      console.log(data);
+    },
+    (error: any) => {
+      switch (error.status) {
+        case 400:
+          alert("Данные о сотруднике не изменены из-за технической ошибки");
+          break;
+        case 404:
+          alert("Сотрудник не существует");
+          break;
+        case 500:
+          alert("Данные о сотруднике не изменены из-за технической ошибки на сервере");
+          break;
+      }
+    },
+    () => {
+      alert("Данные о сотруднике успешно изменены");
+    });
   }
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///
