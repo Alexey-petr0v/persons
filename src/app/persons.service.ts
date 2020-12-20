@@ -26,6 +26,13 @@ export class PersonsService {
     this.iterval = setInterval((thatObj: any[]) => {return func(thatObj)}, 2000);
   }
 
+  public removePerson(id: number) {
+    this.disconnectServer();
+    this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
+      this.connectServer();
+    });
+  }
+
   public getPersons(): Observable<Array<Person>> {
     return this.subject.asObservable();
   }
