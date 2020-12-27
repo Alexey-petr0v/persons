@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { PersonsService } from '../persons.service';
-import { Notifer } from './notifer';
+import { NotifierService } from './notifier.service';
 
 @Component({
   selector: 'app-notifier',
@@ -10,37 +9,23 @@ import { Notifer } from './notifer';
   styleUrls: ['./notifier.component.scss']
 })
 export class NotifierComponent implements OnInit {
-
   private subs = new Subscription();
-  notifer: Notifer = {type: '', text: ''};
   private sub = new Subscription();
 
-  @Input() text = '';
+  public text = '';
+  public modNotifier = 'notifier_hide';;
 
-  modNotifer = 'notifier_hide';
-
-
-  constructor(public personsService: PersonsService) { }
+  constructor(public notifierService: NotifierService) { }
 
   ngOnInit(): void {
-    this.sub = this.personsService.getMessage().subscribe(notifer => {
-      this.notifer = notifer;
-      this.text = notifer.text;
-      if (notifer.type === 'success') {
-        this.modNotifer = 'notifier_success';
-      }
-      else if (notifer.type === 'error') {
-        this.modNotifer = 'notifier_error';
-      }
-      else if (notifer.type === 'hide') {
-        this.modNotifer = 'notifier_hide';
-      }
+    this.sub = this.notifierService.observNotifier().subscribe(notifier => {
+      this.text = notifier.text;
+      this.modNotifier = notifier.modNotifier;
       this.subs.add(this.sub);
     });
   }
 
-  closeNotifer(): void {
-    this.modNotifer =  'notifier_hide';
+  closeNotifier(): void {
+    this.modNotifier =  'notifier_hide';
   }
-
 }

@@ -3,23 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Person } from './person';
-import { Notifer } from './notifier/notifer';
+import { NotifierService } from './notifier/notifier.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonsService {
+  private persons: Array<Person> = [];
+  private subject = new BehaviorSubject(this.persons);
+  private iterval = 0;
 
-  persons: Array<Person> = [];
-  subject = new BehaviorSubject(this.persons);
-  iterval = 0;
-
-  message: Notifer = {type: 'hide', text: 'test'};
-  subjectMessages = new BehaviorSubject(this.message);
-
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public notifierService: NotifierService) {
     this.bindPersonsFromServer(this);
-
     const that = this;
     this.setTimer(() => {
       that.bindPersonsFromServer(that);
@@ -32,36 +27,18 @@ export class PersonsService {
 
   public removePerson(id: number): void {
     this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     },
     (error: any) => {
-    switch (error.status) {
-      case 400:
-        this.message = {type: 'error', text: 'Сотрудник не удален из-за технической ошибки'};
-        this.subjectMessages.next(this.message);
-        break;
-      case 404:
-        this.message = {type: 'error', text: 'Сотрудник не существует'};
-        this.subjectMessages.next(this.message);
-        break;
-      case 500:
-        this.message = {type: 'error', text: 'Сотрудник не удален из-за технической ошибки на сервере'};
-        this.subjectMessages.next(this.message);
-        break;
-    }
+      this.notifierService.setOperation(error.status, 'remove');
   },
   () => {
-    this.message = {type: 'success', text: 'Сотрудник успешно удалён'};
-    this.subjectMessages.next(this.message);
+    this.notifierService.setOperation(200, 'remove');
   });
   }
 
-  public getPersons(): Observable<Array<Person>> {
+  public observPersons(): Observable<Array<Person>> {
     return this.subject.asObservable();
-  }
-
-  public getMessage(): Observable<Notifer> {
-    return this.subjectMessages.asObservable();
   }
 
   public createPerson(firstName: string, lastName: string): void {
@@ -74,27 +51,13 @@ export class PersonsService {
       firstName,
       lastName
     }).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     },
     (error: any) => {
-      switch (error.status) {
-        case 400:
-          this.message = {type: 'error', text: 'Сотрудник не добавлен из-за технической ошибки'};
-          this.subjectMessages.next(this.message);
-          break;
-        case 404:
-          this.message = {type: 'error', text: 'Сотрудник не существует'};
-          this.subjectMessages.next(this.message);
-          break;
-        case 500:
-          this.message = {type: 'error', text: 'Сотрудник не добавлен из-за технической ошибки на сервере'};
-          this.subjectMessages.next(this.message);
-          break;
-      }
+      this.notifierService.setOperation(error.status, 'create');
     },
     () => {
-      this.message = {type: 'success', text: 'Сотрудник успешно добавлен'};
-      this.subjectMessages.next(this.message);
+      this.notifierService.setOperation(200, 'create');
     });
   }
 
@@ -103,27 +66,13 @@ export class PersonsService {
       firstName,
       lastName
     }).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     },
     (error: any) => {
-      switch (error.status) {
-        case 400:
-          this.message = {type: 'error', text: 'Данные о сотруднике не изменены из-за технической ошибки'};
-          this.subjectMessages.next(this.message);
-          break;
-        case 404:
-          this.message = {type: 'error', text: 'Сотрудник не существует'};
-          this.subjectMessages.next(this.message);
-          break;
-        case 500:
-          this.message = {type: 'error', text: 'Данные о сотруднике не изменены из-за технической ошибки на сервере'};
-          this.subjectMessages.next(this.message);
-          break;
-      }
+      this.notifierService.setOperation(error.status, 'update');
     },
     () => {
-      this.message = {type: 'success', text: 'Данные о сотруднике успешно изменены'};
-      this.subjectMessages.next(this.message);
+      this.notifierService.setOperation(200, 'update');
     });
   }
 

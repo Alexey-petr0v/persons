@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Person } from '../person';
 import { PersonsService } from '../persons.service';
+import { NotifierService } from '../notifier/notifier.service';
 
 @Component({
   selector: 'app-persons',
@@ -12,13 +13,13 @@ import { PersonsService } from '../persons.service';
 export class PersonsComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
-  peoples: Array<Person> = [];
+  public peoples: Array<Person> = [];
   private sub = new Subscription();
 
-  constructor(public personsService: PersonsService) { }
+  constructor(public personsService: PersonsService, public notifierService: NotifierService) { }
 
   ngOnInit(): void {
-    this.sub = this.personsService.getPersons().subscribe(peoples => {
+    this.sub = this.personsService.observPersons().subscribe(peoples => {
       this.peoples = peoples;
       this.subs.add(this.sub);
     });
