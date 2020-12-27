@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Person } from './person';
 import { NotifierService } from './notifier/notifier.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class PersonsService {
   }
 
   public removePerson(id: number): void {
-    this.http.delete('http://localhost:3000/persons/' + id).subscribe(data => {
+    this.http.delete(environment.apiUrl + id).subscribe(data => {
       // console.log(data);
     },
     (error: any) => {
@@ -46,7 +47,7 @@ export class PersonsService {
     if (this.persons.length !== 0) {
       id = this.persons[this.persons.length - 1].id + 1;
     }
-    this.http.post('http://localhost:3000/persons', {
+    this.http.post(environment.apiUrl, {
       id,
       firstName,
       lastName
@@ -62,7 +63,7 @@ export class PersonsService {
   }
 
   public updatePerson(id: number, firstName: string, lastName: string): void {
-    this.http.put('http://localhost:3000/persons/' + id, {
+    this.http.put(environment.apiUrl + id, {
       firstName,
       lastName
     }).subscribe(data => {
@@ -78,7 +79,7 @@ export class PersonsService {
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///
   private bindPersonsFromServer(that: PersonsService): void {
-    this.http.get('http://localhost:3000/persons').subscribe((response: any) => {
+    this.http.get(environment.apiUrl).subscribe((response: any) => {
       if (JSON.stringify(that.persons) !== JSON.stringify(response)) {
         that.persons = response.map((obj: Person) => {
           const person = {id: obj.id, firstName: obj.firstName, lastName: obj.lastName};
