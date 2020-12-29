@@ -44,7 +44,7 @@ export class PersonsService {
   }
 
   public createPerson(firstName: string, lastName: string): boolean {
-    if ((firstName !== '')&&(lastName !== '')) {
+    if ((firstName !== '') && (lastName !== '')) {
       let id = 1;
       if (this.persons.length !== 0) {
         id = this.persons[this.persons.length - 1].id + 1;
@@ -67,19 +67,19 @@ export class PersonsService {
     else {
       this.validationErrors = [];
       if (firstName === '') {
-        this.validationErrors.push(' введите имя')
+        this.validationErrors.push(' введите имя');
       }
       if (lastName === '') {
-        this.validationErrors.push(' введите фамилию')
+        this.validationErrors.push(' введите фамилию');
       }
-      alert("Пожалуйста,"+this.validationErrors)
+      alert('Пожалуйста,' + this.validationErrors);
     }
     return false;
   }
 
   public updatePerson(id: number, firstName: string, lastName: string): boolean {
-    if ((firstName !== '')&&(lastName !== '')) {
-      console.log("id: "+id)
+    if ((firstName !== '') && (lastName !== '')) {
+      console.log('id: ' + id);
       this.http.put(environment.apiUrl + id, {
         firstName,
         lastName
@@ -98,12 +98,12 @@ export class PersonsService {
     else {
       this.validationErrors = [];
       if (firstName === '') {
-        this.validationErrors.push(' введите имя')
+        this.validationErrors.push(' введите имя');
       }
       if (lastName === '') {
-        this.validationErrors.push(' введите фамилию')
+        this.validationErrors.push(' введите фамилию');
       }
-      alert("Пожалуйста,"+this.validationErrors);
+      alert('Пожалуйста,' + this.validationErrors);
       return false;
     }
   }

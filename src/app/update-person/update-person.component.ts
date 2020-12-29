@@ -16,8 +16,8 @@ export class UpdatePersonComponent implements OnInit {
 
   hideModal = 'update-person__modal_hide';
 
-  firstNameControl = new FormControl;
-  lastNameControl = new FormControl;
+  firstNameControl = new FormControl();
+  lastNameControl = new FormControl();
 
   private inputPattern = '[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\\s]*$';
 
@@ -29,7 +29,7 @@ export class UpdatePersonComponent implements OnInit {
   }
 
   updatePerson(): void {
-    if (this.personsService.updatePerson(this.idperson, this.firstNameControl.value, this.lastNameControl.value)) this.viewModal();
+    if (this.personsService.updatePerson(this.idperson, this.firstNameControl.value, this.lastNameControl.value)) { this.viewModal(); }
   }
 
   viewModal(): void {

@@ -15,7 +15,7 @@ export class NotifierService {
     this.subjectNotifier = new BehaviorSubject(this.notifier);
   }
 
-  public setOperation(status: number, typeOperation: string) {
+  public setOperation(status: number, typeOperation: string): void {
     this.notifier.status = status;
     this.notifier.typeOperation = typeOperation;
 
@@ -85,7 +85,7 @@ export class NotifierService {
     return this.subjectNotifier.asObservable();
   }
 
-  private setTextAndMod(mod: string, text: string) {
+  private setTextAndMod(mod: string, text: string): void {
     this.notifier.modNotifier = mod;
     this.notifier.text = text;
   }

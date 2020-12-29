@@ -13,7 +13,7 @@ export class NotifierComponent implements OnInit {
   private sub = new Subscription();
 
   public text = '';
-  public modNotifier = 'notifier_hide';;
+  public modNotifier = 'notifier_hide';
 
   constructor(public notifierService: NotifierService) { }
 
