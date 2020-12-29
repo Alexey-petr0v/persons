@@ -6,14 +6,30 @@
       <div class="create-person__top">
         <h1 class="create-person__title">Создание сотрудника</h1>
       </div>
-      <div class="create-person__form">
+      <form class="create-person__form">
         <p><a href="#" (click)="viewModal()">Назад к списку</a></p>
-        <input type="text" name="firstName" class="create-person__input create-person__input_first" [(ngModel)]="firstName">
-        <input type="text" name="lastName" class="create-person__input" [(ngModel)]="lastName">
+        <div class="create-person__input-box create-person__input-box_first">
+          <input type="text" [formControl]="firstNameControl" name="firstName" class="create-person__input create-person__input_first" placeholder="Введите имя сотрудника">
+          <div *ngIf="firstNameControl.hasError('required')" class="create-person__warning-elem">
+            <p class="create-person__warning-text">Это поле обязательно к заполнению</p>
+          </div>
+          <div *ngIf="firstNameControl.hasError('pattern')" class="create-person__warning-elem">
+            <p class="create-person__warning-text">Неправильно заполнено поле</p>
+          </div>
+        </div>
+        <div class="create-person__input-box">
+          <input type="text" [formControl]="lastNameControl" name="lastName" class="create-person__input" placeholder="Введите фамилию сотрудника">
+          <div *ngIf="lastNameControl.hasError('required')" class="create-person__warning-elem">
+            <p class="create-person__warning-text">Это поле обязательно к заполнению</p>
+          </div>
+          <div *ngIf="lastNameControl.hasError('pattern')" class="create-person__warning-elem">
+            <p class="create-person__warning-text">Неправильно заполнено поле</p>
+          </div>
+        </div>
         <div class="create-person__buttons">
           <button class="create-person__button" (click)="savePerson()">Сохранить</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

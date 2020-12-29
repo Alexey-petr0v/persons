@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { PersonsService } from '../persons.service';
 
@@ -10,19 +11,25 @@ import { PersonsService } from '../persons.service';
 export class UpdatePersonComponent implements OnInit {
 
   @Input() idperson = 0;
-
   @Input() firstName = '';
   @Input() lastName = '';
+
   hideModal = 'update-person__modal_hide';
+
+  firstNameControl = new FormControl;
+  lastNameControl = new FormControl;
+
+  private inputPattern = '[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\\s]*$';
 
   constructor(public personsService: PersonsService) { }
 
   ngOnInit(): void {
+    this.firstNameControl = new FormControl(this.firstName, [Validators.required, Validators.pattern(this.inputPattern)]);
+    this.lastNameControl = new FormControl(this.lastName, [Validators.required, Validators.pattern(this.inputPattern)]);
   }
 
   updatePerson(): void {
-    this.personsService.updatePerson(this.idperson, this.firstName, this.lastName);
-    this.viewModal();
+    if (this.personsService.updatePerson(this.idperson, this.firstNameControl.value, this.lastNameControl.value)) this.viewModal();
   }
 
   viewModal(): void {

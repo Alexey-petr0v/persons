@@ -34,8 +34,22 @@
   flex-direction: column;
   margin: 10px;
 }
-.create-person__input_first {
+.create-person__input-box {
+  display: flex;
+  flex-direction: column;
+  &_first {
+    margin-bottom: 10px;
+  }
+}
+.create-person__warning-elem {
+  background-color: #f7cbca;
+  border: 1px solid #f3a7a5;
+}
+.create-person__warning-text {
+  color: #A61E1E;
+  margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 .create-person__buttons {
   display: flex;

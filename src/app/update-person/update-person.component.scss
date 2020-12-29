@@ -34,8 +34,22 @@
   flex-direction: column;
   margin: 10px;
 }
-.update-person__input_first {
+.update-person__input-box {
+  display: flex;
+  flex-direction: column;
+  &_first {
+    margin-bottom: 10px;
+  }
+}
+.update-person__warning-elem {
+  background-color: #f7cbca;
+  border: 1px solid #f3a7a5;
+}
+.update-person__warning-text {
+  color: #A61E1E;
+  margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 .update-person__buttons {
   display: flex;

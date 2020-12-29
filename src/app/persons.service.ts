@@ -13,6 +13,7 @@ export class PersonsService {
   private persons: Array<Person> = [];
   private subject = new BehaviorSubject(this.persons);
   private iterval = 0;
+  private validationErrors: Array<string> = [];
 
   constructor(public http: HttpClient, public notifierService: NotifierService) {
     this.bindPersonsFromServer(this);
@@ -42,39 +43,69 @@ export class PersonsService {
     return this.subject.asObservable();
   }
 
-  public createPerson(firstName: string, lastName: string): void {
-    let id = 1;
-    if (this.persons.length !== 0) {
-      id = this.persons[this.persons.length - 1].id + 1;
+  public createPerson(firstName: string, lastName: string): boolean {
+    if ((firstName !== '')&&(lastName !== '')) {
+      let id = 1;
+      if (this.persons.length !== 0) {
+        id = this.persons[this.persons.length - 1].id + 1;
+      }
+      this.http.post(environment.apiUrl, {
+        id,
+        firstName,
+        lastName
+      }).subscribe(data => {
+        // console.log(data);
+      },
+      (error: any) => {
+        this.notifierService.setOperation(error.status, 'create');
+      },
+      () => {
+        this.notifierService.setOperation(200, 'create');
+      });
+      return true;
     }
-    this.http.post(environment.apiUrl, {
-      id,
-      firstName,
-      lastName
-    }).subscribe(data => {
-      // console.log(data);
-    },
-    (error: any) => {
-      this.notifierService.setOperation(error.status, 'create');
-    },
-    () => {
-      this.notifierService.setOperation(200, 'create');
-    });
+    else {
+      this.validationErrors = [];
+      if (firstName === '') {
+        this.validationErrors.push(' введите имя')
+      }
+      if (lastName === '') {
+        this.validationErrors.push(' введите фамилию')
+      }
+      alert("Пожалуйста,"+this.validationErrors)
+    }
+    return false;
   }
 
-  public updatePerson(id: number, firstName: string, lastName: string): void {
-    this.http.put(environment.apiUrl + id, {
-      firstName,
-      lastName
-    }).subscribe(data => {
-      // console.log(data);
-    },
-    (error: any) => {
-      this.notifierService.setOperation(error.status, 'update');
-    },
-    () => {
-      this.notifierService.setOperation(200, 'update');
-    });
+  public updatePerson(id: number, firstName: string, lastName: string): boolean {
+    if ((firstName !== '')&&(lastName !== '')) {
+      console.log("id: "+id)
+      this.http.put(environment.apiUrl + id, {
+        firstName,
+        lastName
+      })
+      .subscribe(data => {
+        // console.log(data);
+      },
+      (error: any) => {
+        this.notifierService.setOperation(error.status, 'update');
+      },
+      () => {
+        this.notifierService.setOperation(200, 'update');
+      });
+      return true;
+    }
+    else {
+      this.validationErrors = [];
+      if (firstName === '') {
+        this.validationErrors.push(' введите имя')
+      }
+      if (lastName === '') {
+        this.validationErrors.push(' введите фамилию')
+      }
+      alert("Пожалуйста,"+this.validationErrors);
+      return false;
+    }
   }
 
   // -------- CONNECT/DISCONNECT SERVER-------- ///

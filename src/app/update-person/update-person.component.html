@@ -5,14 +5,30 @@
       <div class="update-person__top">
         <h1 class="update-person__title">Редактирование сотрудника</h1>
       </div>
-      <div class="update-person__form">
+      <form class="update-person__form">
         <p><a href="#" (click)="viewModal()">Назад к списку</a></p>
-        <input type="text" name="firstName" class="update-person__input update-person__input_first" [(ngModel)]="firstName">
-        <input type="text" name="lastName" class="update-person__input" [(ngModel)]="lastName">
+        <div class="update-person__input-box update-person__input-box_first">
+          <input type="text" [formControl]="firstNameControl" name="firstName" class="update-person__input" placeholder="Введите имя сотрудника">
+          <div *ngIf="firstNameControl.hasError('required')" class="update-person__warning-elem">
+            <p class="update-person__warning-text">Это поле обязательно к заполнению</p>
+          </div>
+          <div *ngIf="firstNameControl.hasError('pattern')" class="update-person__warning-elem">
+            <p class="update-person__warning-text">Неправильно заполнено поле</p>
+          </div>
+        </div>
+        <div class="update-person__input-box">
+          <input type="text" [formControl]="lastNameControl" name="lastName" class="update-person__input" placeholder="Введите фамилию сотрудника">
+          <div *ngIf="lastNameControl.hasError('required')" class="update-person__warning-elem">
+            <p class="update-person__warning-text">Это поле обязательно к заполнению</p>
+          </div>
+          <div *ngIf="firstNameControl.hasError('pattern')" class="update-person__warning-elem">
+            <p class="update-person__warning-text">Неправильно заполнено поле</p>
+          </div>
+        </div>
         <div class="update-person__buttons">
           <button class="update-person__button" (click)="updatePerson()">Сохранить</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
